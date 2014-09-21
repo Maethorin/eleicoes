@@ -1,0 +1,5 @@
+MySQL-python
+requests
+Django
+lxml
+cssselect

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block corpo %}
+<p>Selecione seus candidatos e clique no botão criar abaixo</p>
+
+<form class="form-horizontal" role="form">
+{% for cargo in cargos %}
+    {% include "include/candidato_escolha.html" %}
+{% endfor %}
+</form>
+
+<div class="link">
+    <a href="" class="btn btn-success link-santinho disabled" role="button">Criar</a> <button class="btn btn-danger limpar">Limpar</button>
+</div>
+
+{% block js_bottom %}
+<script type="application/javascript">
+    var presidente = null;
+    var governador = null;
+    var senador = null;
+    var deputado_federal = null;
+    var deputado_estadual = null;
+    var $linkSantinho = $(".link-santinho");
+    var $presidente = $("#presidente");
+    var $governador = $("#governador");
+    var $senador = $("#senador");
+    var $deputadoFederal = $("#deputado-federal");
+    var $deputadoEstadual = $("#deputado-{% if estado == 'DF' %}distrital{% else %}estadual{% endif %}");
+    $presidente.chosen();
+    $governador.chosen();
+    $senador.chosen();
+    $deputadoFederal.chosen();
+    $deputadoEstadual.chosen();
+
+    $(".limpar").click(function() {
+        presidente = null;
+        governador = null;
+        senador = null;
+        deputado_federal = null;
+        deputado_estadual = null;
+
+        $presidente.val('');
+        $presidente.trigger('chosen:updated');
+
+        $governador.val('');
+        $governador.trigger('chosen:updated');
+
+        $senador.val('');
+        $senador.trigger('chosen:updated');
+
+        $deputadoFederal.val('');
+        $deputadoFederal.trigger('chosen:updated');
+
+        $deputadoEstadual.val('');
+        $deputadoEstadual.trigger('chosen:updated');
+
+        $linkSantinho.addClass('disabled');
+    });
+    $("select").change(function() {
+        var $this = $(this);
+        if ($this.attr("id") == "presidente") {
+            presidente = $this.val()
+        }
+        if ($this.attr("id") == "governador") {
+            governador = $this.val()
+        }
+        if ($this.attr("id") == "senador") {
+            senador = $this.val()
+        }
+        if ($this.attr("id") == "deputado-federal") {
+            deputado_federal = $this.val()
+        }
+        if ($this.attr("id") == "deputado-{% if estado == 'DF' %}distrital{% else %}estadual{% endif %}") {
+            deputado_estadual = $this.val()
+        }
+        if (presidente && governador && senador && deputado_federal && deputado_estadual) {
+            var url = "/santinho/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
+            $linkSantinho.attr("href", url);
+            $linkSantinho.removeClass('disabled');
+        }
+    });
+</script>
+{% endblock js_bottom %}
+
+{% endblock corpo %}
