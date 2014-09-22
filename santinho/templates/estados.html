@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block corpo %}
+    <div class="row">
+        <select id="estado" name="estado" data-placeholder="Escolha seu Estado" class="form-control">
+            <option value=""></option>
+            {% for estado in estados %}
+                <option value="{{ estado.0 }}">{{ estado.1 }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="row text-center">
+        <a href="" class="btn btn-success avancar disabled" role="button">Avançar</a>
+    </div>
+{% endblock corpo %}
+
+{% block js_bottom %}
+<script type="application/javascript">
+    var estado = null;
+    var $estado = $("#estado");
+    $estado.chosen();
+    $("select").change(function() {
+        var $this = $(this);
+        estado = $this.val();
+        if (estado) {
+            var url = "/escolher/" + estado;
+            $(".avancar").attr("href", url);
+            $(".avancar").removeClass('disabled');
+        }
+    });
+</script>
+{% endblock js_bottom %}

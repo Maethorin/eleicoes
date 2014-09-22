@@ -1,11 +1,8 @@
 <div class="form-group">
-    <label for="{{ cargo.nome|slugify }}" class="col-sm-2 control-label">{{ cargo.nome }}:</label>
-    <div class="col-sm-10">
-        <select id="{{ cargo.nome|slugify }}" name="{{ cargo.nome|slugify }}" data-placeholder="Para {{ cargo.nome }}..." class="form-control">
-            <option value=""></option>
-            {% for candidato in cargo.candidatos %}
-                <option value="{{ candidato.numero }}">{{ candidato }}</option>
-            {% endfor %}
-        </select>
-    </div>
+    <select id="{{ cargo.nome|slugify }}" name="{{ cargo.nome|slugify }}" data-placeholder="Para {{ cargo.nome }}..." class="form-control">
+        <option value=""></option>
+        {% for candidato in cargo.candidatos %}
+            <option value="{{ candidato.numero }}">{{ candidato }}</option>
+        {% endfor %}
+    </select>
 </div>

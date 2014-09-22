@@ -1,6 +1,22 @@
-<p>
-    Para {{ candidato.cargo.nome }}:
-    <span class="candidato">
-        <img src="http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{{ candidato.estado }}/foto/{{ candidato.codigo_foto }}.jpg" alt="{{ canditado.nome }}"/> - {{ candidato }}
-    </span>
-</p>
+<div class="row santinho">
+    <div class="well well-sm candidato col-sm-5">
+        <div class="col-sm-10">
+            <div class="nome">
+                {{ candidato.nome }}
+            </div>
+            <div class="numero">
+                {% for algarismo in candidato.numero_lista %}
+                    <span class="algarismo">
+                    {{ algarismo }}
+                    </span>
+                {% endfor %}
+            </div>
+            <div class="cargo">
+                para {{ candidato.cargo.nome }}
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <img src="http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{{ candidato.estado }}/foto/{{ candidato.codigo_foto }}.jpg" alt="{{ canditado.nome }}"/>
+        </div>
+    </div>
+</div>

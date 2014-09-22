@@ -9,9 +9,10 @@
 {% endfor %}
 </form>
 
-<div class="link">
-    <a href="" class="btn btn-success link-santinho disabled" role="button">Criar</a> <button class="btn btn-danger limpar">Limpar</button>
+<div class="row text-center">
+    <a href="{% url 'estados' %}" class="btn btn-warning" role="button">Voltar</a> <a href="" class="btn btn-success link-santinho disabled" role="button">Criar</a> <button class="btn btn-danger limpar">Limpar</button>
 </div>
+{% endblock corpo %}
 
 {% block js_bottom %}
 <script type="application/javascript">
@@ -81,5 +82,3 @@
     });
 </script>
 {% endblock js_bottom %}
-
-{% endblock corpo %}

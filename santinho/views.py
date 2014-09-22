@@ -87,3 +87,8 @@ def escolher_candidatos(request, estado):
         cargo_nome = "Deputado Distrital"
     cargos.append({"nome": cargo_nome, "candidatos": Candidato.obter_lista_por_cargo(cargo, estado)})
     return render_to_response('escolher_candidatos.html', locals())
+
+
+def estados(request):
+    estados = ESTADOS[1:]
+    return render_to_response('estados.html', locals())

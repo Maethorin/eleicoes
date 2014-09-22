@@ -115,5 +115,9 @@ class Candidato(models.Model):
         return candidato
 
     @property
+    def numero_lista(self):
+        return str(self.numero)
+
+    @property
     def url_de_imagem(self):
         return "http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{}/foto/{}.jpg".format(self.estado, self.estado_codigo, self.codigo_foto)

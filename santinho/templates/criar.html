@@ -6,5 +6,7 @@
 {% for candidato in candidatos %}
     {% include "include/candidato_santinho.html" %}
 {% endfor %}
-    <a href="{% url "escolher_candidatos" estado=estado %}" class="btn btn-warning">Voltar</a>
+    <div class="row text-center">
+        <a href="{% url "escolher_candidatos" estado=estado %}" class="btn btn-warning">Voltar</a>
+    </div>
 {% endblock corpo %}
