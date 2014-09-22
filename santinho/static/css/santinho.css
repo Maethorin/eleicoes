@@ -13,14 +13,16 @@
 
 .algarismo {
     background-color: #555;
-    border: 1px solid #DDD;
+    border: 2px solid;
+    border-color: #CCC #444 #444 #CCC;
     color: #DDD;
     display: inline-block;
-    width: 23px;
-    height: 26px;
+    width: 26px;
+    height: 28px;
     margin: 0;
     text-align: center;
     font-size: 18px;
     font-weight: bold;
-    padding-top: 1px;
+    padding-top: 2px;
+    padding-left: 2px;
 }

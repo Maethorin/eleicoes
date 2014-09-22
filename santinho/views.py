@@ -8,6 +8,13 @@ from lxml import html as lhtml
 from santinho.models import ESTADOS, Candidato, Cargo
 
 
+def nome_do_estado(sigla):
+    for estado in ESTADOS:
+        if estado[0] == sigla:
+            return estado[1]
+    return ''
+
+
 def codigos_fotos(request):
     for estado in ESTADOS:
         for cargo in range(1, 9):
@@ -86,6 +93,7 @@ def escolher_candidatos(request, estado):
         cargo = 8
         cargo_nome = "Deputado Distrital"
     cargos.append({"nome": cargo_nome, "candidatos": Candidato.obter_lista_por_cargo(cargo, estado)})
+    nome_estado = nome_do_estado(estado)
     return render_to_response('escolher_candidatos.html', locals())
 
 
