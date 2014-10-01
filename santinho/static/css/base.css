@@ -1,18 +1,28 @@
 body {
-    background-color: #f7ecb5;
+    background-color: #EFEFEF;
 }
 
 .cabecalho {
-    background-color: #285e8e;
-    color: #FFF;
+    background-color: #DDD;
+    color: #444;
     border-bottom: 2px solid #FFF;
     border-top: 2px solid #333;
     padding: 10px 0 20px 0;
     margin-bottom: 30px;
 }
 
+.cabecalho a {
+    color: #444;
+    text-decoration: none;
+}
+
+.cabecalho a:hover {
+    color: #444;
+    text-decoration: none;
+}
+
 .rodape {
-    background-color: #67b168;
+    background-color: #999;
     color: #FFF;
     border-top: 2px solid #FFF;
     border-bottom: 2px solid #333;
