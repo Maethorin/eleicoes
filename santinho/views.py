@@ -111,3 +111,7 @@ def escolher_candidatos(request, estado):
 def estados(request):
     estados = ESTADOS[1:]
     return render_to_response('estados.html', locals())
+
+
+def home(request):
+    return render_to_response('home.html')

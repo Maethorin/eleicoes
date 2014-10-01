@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block corpo %}
+    <div class="row">
+        <h1>Santinho Eletrônico</h1>
+        <p>Crie o seu santinho para o dia da eleição e compartilhe com seus amigos!</p>
+        <p>É simples e em apenas dois passo você tem o seu santinho pronto e pode imprimi-lo e leva-lo até a urna no dia da eleição</p>
+    </div>
+    <div class="row text-center">
+        <a href="{% url 'estados' %}" class="btn btn-default" role="button">Iniciar</a>
+    </div>
+{% endblock corpo %}

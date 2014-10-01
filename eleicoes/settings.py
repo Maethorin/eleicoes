@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '_whb&g-765uf8jrm(q+%+f2wt%q84s#za!$#-%_kco-o0tputw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['*']
 
@@ -64,21 +64,6 @@ WSGI_APPLICATION = 'eleicoes.wsgi.application'
 
 DATABASES = {'default': dj_database_url.config(default="postgres://eleicoes:tudo-Cor@localhost:5432/eleicoes")}
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'eleicoes',
-#         'USER': 'eleicoes',
-#         'PASSWORD': 'tudo-Cor',
-#         'HOST': '',
-#         'PORT': '',
-#     }
-# }
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
-
 LANGUAGE_CODE = 'pt_BR'
 
 TIME_ZONE = 'UTC'
@@ -88,9 +73,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
