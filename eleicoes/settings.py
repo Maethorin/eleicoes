@@ -14,16 +14,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 import dj_database_url
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '_whb&g-765uf8jrm(q+%+f2wt%q84s#za!$#-%_kco-o0tputw'
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 TEMPLATE_DEBUG = DEBUG
@@ -77,8 +69,10 @@ USE_TZ = True
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'santinho/static'),
 )
 
 level = 'DEBUG'
