@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -60,16 +62,18 @@ WSGI_APPLICATION = 'eleicoes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'eleicoes',
-        'USER': 'eleicoes',
-        'PASSWORD': 'tudo-Cor',
-        'HOST': '',
-        'PORT': '',
-    }
-}
+DATABASES = {'default': dj_database_url.config(default="postgres://eleicoes:tudo-Cor@localhost:5432/eleicoes")}
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'eleicoes',
+#         'USER': 'eleicoes',
+#         'PASSWORD': 'tudo-Cor',
+#         'HOST': '',
+#         'PORT': '',
+#     }
+# }
 
 
 # Internationalization
