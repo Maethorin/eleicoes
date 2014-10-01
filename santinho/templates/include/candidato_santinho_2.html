@@ -1,0 +1,28 @@
+<div class="santinho {{ candidato.cargo.nome|slugify }}">
+    <input type="hidden" name="candidato_{{ candidato.cargo.codigo }}" value="{{ candidato.numero }}"/>
+    <div class="candidato">
+        <div class="foto">
+            <img src="http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{{ candidato.estado }}/foto/{{ candidato.codigo_foto }}.jpg" alt="{{ canditado.nome }}"/>
+        </div>
+        <div class="dados">
+            <div class="cargo">
+                {{ candidato.cargo.nome|upper }}
+            </div>
+            <div class="nome">
+                <div class="primero-nome">
+                    {{ candidato.primeiro_nome }}
+                </div>
+                <div class="segundo-nome">
+                    {{ candidato.segundo_nome }}
+                </div>
+            </div>
+            <div class="numero">
+                <span class="numero-partido">{{ candidato.numero_partido }}</span>{{ candidato.numero_sem_partido }}
+            </div>
+            <div class="partido">
+                {{ candidato.partido.sigla }}
+            </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+</div>

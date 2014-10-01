@@ -115,8 +115,24 @@ class Candidato(models.Model):
         return candidato
 
     @property
+    def primeiro_nome(self):
+        return " ".join(self.nome.split(" ")[0:-1])
+
+    @property
+    def segundo_nome(self):
+        return " ".join(self.nome.split(" ")[-1])
+
+    @property
     def numero_lista(self):
         return str(self.numero)
+
+    @property
+    def numero_partido(self):
+        return self.numero_lista[:2]
+
+    @property
+    def numero_sem_partido(self):
+        return self.numero_lista[2:]
 
     @property
     def url_de_imagem(self):

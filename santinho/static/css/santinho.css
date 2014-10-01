@@ -1,14 +1,98 @@
 .santinho {
     margin-bottom: 5px;
-    overflow: hidden;
+}
+
+.pre-gov, .outros {
+    float: left;
+}
+
+.pre-gov .candidato {
+    padding: 17px 52px 10px 16px;
+    margin: 0 15px 26px 0;
+}
+
+.pre-gov .foto {
+    margin-right: 25px;
+}
+
+.outros .candidato {
+    padding: 15px;
+    margin: 0 10px 10px 0;
 }
 
 .candidato {
-    margin-bottom: 5px;
+    color: #333;
+    font-family: 'Roboto', verdana, sans-serif;
+    border: solid 1px #D4D6D9;
+    background-color: #F1F1F1;
+    -webkit-box-shadow: 2px 2px 2px 0 rgba(150, 150, 150, 0.75);
+    -moz-box-shadow:    2px 2px 2px 0 rgba(150, 150, 150, 0.75);
+    box-shadow:         2px 2px 2px 0 rgba(150, 150, 150, 0.75);
 }
 
-.candidato img {
-    height: 65px;
+.candidato .foto, .candidato .dados {
+    float: left;
+}
+
+.pre-gov .nome {
+    margin-top: 11px;
+    line-height: 37px;
+    font-size: 34px;
+}
+
+.pre-gov .segundo-nome {
+    letter-spacing: -0.13em;
+    line-height: 39px;
+}
+
+.outros .nome {
+    margin-top: 10px;
+    line-height: 28px;
+}
+
+.primero-nome, .numero {
+    font-weight: 300;
+}
+
+.numero-partido, .cargo, .partido, .segundo-nome {
+    font-weight: 500;
+}
+
+.pre-gov .cargo {
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+}
+
+.pre-gov .numero {
+    font-size: 83px;
+    line-height: 97px;
+}
+
+.pre-gov .partido {
+    font-size: 21px;
+    margin-left: 5px;
+    line-height: 19px;
+}
+
+.outros .cargo {
+    font-size: 15px;
+}
+
+.outros .nome {
+    font-size: 25px;
+}
+
+.outros .numero {
+    font-size: 35px;
+}
+
+.pre-gov img {
+    height: 221px;
+}
+
+.outros img {
+    height: 145px;
 }
 
 .algarismo {

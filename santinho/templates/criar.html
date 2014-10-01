@@ -1,13 +1,24 @@
 {% extends "base.html" %}
 {% block css %}
-        <link rel="stylesheet" href="/static/css/santinho.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,300' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/santinho.css" />
 {% endblock css %}
 {% block corpo %}
     <form action="{% url "escolher_candidatos" estado=estado %}" method="post">
         {% csrf_token %}
-        {% for candidato in candidatos %}
-            {% include "include/candidato_santinho.html" %}
-        {% endfor %}
+        <div class="row">
+            <div class="pre-gov">
+                {% for candidato in pre_gov %}
+                    {% include "include/candidato_santinho_2.html" %}
+                {% endfor %}
+            </div>
+            <div class="outros">
+                {% for candidato in outros %}
+                    {% include "include/candidato_santinho_2.html" %}
+                {% endfor %}
+            </div>
+        </div>
+
         <div class="row text-center">
             <button type="submit" class="btn btn-warning">Voltar</button>
             <a href="{% url 'estados' %}" class="btn btn-default" role="button">Criar outro santinho</a>

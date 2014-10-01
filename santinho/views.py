@@ -78,6 +78,8 @@ def criar(request, estado, presidente, governador, senador, deputado_federal, de
     if estado == "DF":
         cargo = 8
     candidatos.append(Candidato.obtem_do_numero(deputado_estadual, estado, cargo))
+    pre_gov = candidatos[:2]
+    outros = candidatos[2:]
     return render_to_response('criar.html', locals(), context_instance=RequestContext(request))
 
 
