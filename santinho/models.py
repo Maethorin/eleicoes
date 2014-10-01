@@ -94,7 +94,7 @@ class Candidato(models.Model):
 
     @classmethod
     def obter_lista_por_cargo(cls, cargo, estado):
-        return cls.objects.filter(cargo=cargo, estado=estado)
+        return cls.objects.prefetch_related('partido').filter(cargo=cargo, estado=estado)
 
     @classmethod
     def obtem_do_numero(cls, numero, estado, cargo):

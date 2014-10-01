@@ -3,10 +3,13 @@
         <link rel="stylesheet" href="/static/css/santinho.css">
 {% endblock css %}
 {% block corpo %}
-{% for candidato in candidatos %}
-    {% include "include/candidato_santinho.html" %}
-{% endfor %}
-    <div class="row text-center">
-        <a href="{% url "escolher_candidatos" estado=estado %}" class="btn btn-warning">Voltar</a>
-    </div>
+    <form action="{% url "escolher_candidatos" estado=estado %}" method="post">
+        {% csrf_token %}
+        {% for candidato in candidatos %}
+            {% include "include/candidato_santinho.html" %}
+        {% endfor %}
+        <div class="row text-center">
+            <button type="submit" class="btn btn-warning">Voltar</button>
+        </div>
+    </form>
 {% endblock corpo %}

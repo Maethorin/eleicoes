@@ -1,8 +1,9 @@
+{% load filtros %}
 <div class="form-group">
     <select id="{{ cargo.nome|slugify }}" name="{{ cargo.nome|slugify }}" data-placeholder="Para {{ cargo.nome }}..." class="form-control">
         <option value=""></option>
         {% for candidato in cargo.candidatos %}
-            <option value="{{ candidato.numero }}">{{ candidato }}</option>
+            <option value="{{ candidato.numero }}" {% selecionando cargo.nome|slugify candidato.numero %}>{{ candidato }}</option>
         {% endfor %}
     </select>
 </div>

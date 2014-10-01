@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.template import RequestContext
 
 import requests
 from django.shortcuts import render
@@ -77,7 +78,7 @@ def criar(request, estado, presidente, governador, senador, deputado_federal, de
     if estado == "DF":
         cargo = 8
     candidatos.append(Candidato.obtem_do_numero(deputado_estadual, estado, cargo))
-    return render_to_response('criar.html', locals())
+    return render_to_response('criar.html', locals(), context_instance=RequestContext(request))
 
 
 def escolher_candidatos(request, estado):
@@ -88,12 +89,22 @@ def escolher_candidatos(request, estado):
         {"nome": "Deputado Federal", "candidatos": Candidato.obter_lista_por_cargo(6, estado)},
     ]
     cargo_nome = "Deputado Estadual"
+    cargo_slug = "deputado-estadual"
     cargo = 7
     if estado == "DF":
         cargo = 8
+        cargo_slug = "deputado-distrital"
         cargo_nome = "Deputado Distrital"
     cargos.append({"nome": cargo_nome, "candidatos": Candidato.obter_lista_por_cargo(cargo, estado)})
     nome_estado = nome_do_estado(estado)
+    if request.method == "POST":
+        selecionados = {
+            "presidente": request.POST.get("candidato_1", None),
+            "governador": request.POST.get("candidato_3", None),
+            "senador": request.POST.get("candidato_5", None),
+            "deputado-federal": request.POST.get("candidato_6", None),
+            cargo_slug: request.POST.get("candidato_{}".format(cargo), None),
+        }
     return render_to_response('escolher_candidatos.html', locals())
 
 

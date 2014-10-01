@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load filtros %}
 {% block corpo %}
     <h3>{{ nome_estado }}</h3>
 <p>Selecione seus candidatos e clique no botão criar abaixo</p>
@@ -17,11 +17,16 @@
 
 {% block js_bottom %}
 <script type="application/javascript">
-    var presidente = null;
-    var governador = null;
-    var senador = null;
-    var deputado_federal = null;
-    var deputado_estadual = null;
+    var presidente = {% define_valor_js 'presidente' %};
+    var governador = {% define_valor_js 'governador' %};
+    var senador = {% define_valor_js 'senador' %};
+    var deputado_federal = {% define_valor_js 'deputado-federal' %};
+    {% if estado == 'DF' %}
+    var deputado_estadual = {% define_valor_js 'deputado-distrital' %};
+    {% else %}
+    var deputado_estadual = {% define_valor_js 'deputado-estadual' %};
+    {% endif %}
+
     var $linkSantinho = $(".link-santinho");
     var $presidente = $("#presidente");
     var $governador = $("#governador");
@@ -58,6 +63,13 @@
 
         $linkSantinho.addClass('disabled');
     });
+    function atualizaBotao() {
+        if (presidente && governador && senador && deputado_federal && deputado_estadual) {
+            var url = "/santinho/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
+            $linkSantinho.attr("href", url);
+            $linkSantinho.removeClass('disabled');
+        }
+    }
     $("select").change(function() {
         var $this = $(this);
         if ($this.attr("id") == "presidente") {
@@ -75,11 +87,8 @@
         if ($this.attr("id") == "deputado-{% if estado == 'DF' %}distrital{% else %}estadual{% endif %}") {
             deputado_estadual = $this.val()
         }
-        if (presidente && governador && senador && deputado_federal && deputado_estadual) {
-            var url = "/santinho/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
-            $linkSantinho.attr("href", url);
-            $linkSantinho.removeClass('disabled');
-        }
+        atualizaBotao();
     });
+    atualizaBotao();
 </script>
 {% endblock js_bottom %}
