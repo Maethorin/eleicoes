@@ -15,3 +15,108 @@ body {
 nav, footer, video, audio, object, embed {
     display:none;
 }
+
+.print {
+    display:block;
+}
+
+.no-print {
+    display:none;
+}
+
+
+.candidato {
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.foto {
+    margin-right: 15px;
+}
+
+.cargo {
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0.01em;
+}
+
+.numero {
+    font-size: 83px;
+    line-height: 97px;
+}
+
+.partido {
+    font-size: 21px;
+    margin-left: 5px;
+    line-height: 19px;
+}
+
+.foto img {
+    height: 121px;
+}
+
+.nome {
+    margin-top: 11px;
+    font-size: 34px;
+}
+
+.primero-nome {
+    letter-spacing: -0.01em;
+    line-height: 36px;
+}
+
+.segundo-nome {
+    letter-spacing: -0.13em;
+    line-height: 39px;
+}
+
+/*.outros .candidato {*/
+    /*padding: 11px 40px 7px 6px;*/
+    /*margin: 0 10px 10px 0;*/
+/*}*/
+
+/*.outros .nome {*/
+    /*font-size: 21px;*/
+    /*margin-top: 10px;*/
+    /*line-height: 28px;*/
+/*}*/
+
+/*.share-bar {*/
+    /*margin: 20px 0;*/
+/*}*/
+
+
+/*.outros .primero-nome {*/
+    /*letter-spacing: -0.002em;*/
+    /*line-height: 29px;*/
+/*}*/
+
+/*.outros .segundo-nome {*/
+    /*letter-spacing: -0.12em;*/
+    /*line-height: 21px;*/
+/*}*/
+
+/*.outros .cargo {*/
+    /*font-size: 12px;*/
+    /*line-height: 10px;*/
+/*}*/
+
+/*.outros .numero {*/
+    /*font-size: 45px;*/
+/*}*/
+
+/*.outros img {*/
+    /*height: 85px;*/
+/*}*/
+
+/*.outros .foto {*/
+    /*margin-right: 12px;*/
+/*}*/
+
+.nome, .numero, .partido {
+    float: left;
+}
+
+.numero {
+    margin-left: 30px;
+}

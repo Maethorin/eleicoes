@@ -3,7 +3,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,300' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/santinho.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/share.bar.min.css" />
-{#    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/print.css" media="print" />#}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/print.css" media="print" />
 {% endblock css %}
 {% block corpo %}
     <form action="{% url "escolher_candidatos" estado=estado %}" method="post">
@@ -21,12 +21,12 @@
             </div>
         </div>
 
-        <div class="row text-center">
+        <div class="row text-center no-print">
             <button type="submit" class="btn btn-warning">Voltar</button>
             <a href="{% url 'estados' %}" class="btn btn-default" role="button">Criar outro santinho</a>
         </div>
     </form>
-    <div class="share-bar" data-title="Santinho Eleições 2014" data-url="{% url 'criar_santinho' estado presidente governador senador deputado_federal deputado_estadual %}" data-image-url="http://www.tre-mg.jus.br/imagens/imagens/marca-das-eleicoes-2014/@@images/be49cc7e-06ca-465c-83b9-f480ee664bf3.jpeg" data-hashtags="#eleições #candidatos #santinho"></div>
+    <div class="share-bar no-print" data-title="Santinho Eleições 2014" data-url="{% url 'criar_santinho' estado presidente governador senador deputado_federal deputado_estadual %}" data-image-url="http://www.tre-mg.jus.br/imagens/imagens/marca-das-eleicoes-2014/@@images/be49cc7e-06ca-465c-83b9-f480ee664bf3.jpeg" data-hashtags="#eleições #candidatos #santinho"></div>
 {% endblock corpo %}
 {% block js_bottom %}
     <script src="{{ STATIC_URL }}js/share.bar.min.js"></script>

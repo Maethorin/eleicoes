@@ -79,9 +79,5 @@ body {
 }
 
 .print {
-    display:block;
-}
-
-.no-print {
-    display:none;
+    display: none;
 }
