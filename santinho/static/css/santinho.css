@@ -1,10 +1,14 @@
+.candidatos {
+    margin-top: 20px;
+}
+
 .santinho {
     margin-bottom: 5px;
 }
 
-.pre-gov, .outros {
-    float: left;
-}
+/*.pre-gov, .outros {*/
+    /*float: left;*/
+/*}*/
 
 .pre-gov .candidato {
     padding: 17px 54px 10px 16px;
@@ -63,7 +67,7 @@
 }
 
 .share-bar {
-    margin-top: 20px;
+    margin: 20px 0;
 }
 
 

@@ -107,13 +107,13 @@ def escolher_candidatos(request, estado):
             "deputado-federal": request.POST.get("candidato_6", None),
             cargo_slug: request.POST.get("candidato_{}".format(cargo), None),
         }
-    return render_to_response('escolher_candidatos.html', locals())
+    return render_to_response('escolher_candidatos.html', locals(), context_instance=RequestContext(request))
 
 
 def estados(request):
     estados = ESTADOS[1:]
-    return render_to_response('estados.html', locals())
+    return render_to_response('estados.html', locals(), context_instance=RequestContext(request))
 
 
 def home(request):
-    return render_to_response('home.html')
+    return render_to_response('home.html', context_instance=RequestContext(request))

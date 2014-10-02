@@ -7,13 +7,13 @@
 {% block corpo %}
     <form action="{% url "escolher_candidatos" estado=estado %}" method="post">
         {% csrf_token %}
-        <div class="row">
-            <div class="pre-gov">
+        <div class="row candidatos">
+            <div class="pre-gov col-sm-8">
                 {% for candidato in pre_gov %}
                     {% include "include/candidato_santinho_2.html" %}
                 {% endfor %}
             </div>
-            <div class="outros">
+            <div class="outros col-sm-4">
                 {% for candidato in outros %}
                     {% include "include/candidato_santinho_2.html" %}
                 {% endfor %}

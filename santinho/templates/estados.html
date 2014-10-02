@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block corpo %}
-    <div class="row">
-        <select id="estado" name="estado" data-placeholder="Escolha seu Estado" class="form-control">
+    <div class="row estado">
+        <select id="estado" name="estado" data-placeholder="Escolha seu Estado">
             <option value=""></option>
             {% for estado in estados %}
                 <option value="{{ estado.0 }}">{{ estado.1 }}</option>
@@ -17,7 +17,7 @@
 <script type="application/javascript">
     var estado = null;
     var $estado = $("#estado");
-    $estado.chosen();
+    $estado.select2({width: "100%"});
     $("select").change(function() {
         var $this = $(this);
         estado = $this.val();

@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% load filtros %}
 {% block corpo %}
-    <h3>{{ nome_estado }}</h3>
-<p>Selecione seus candidatos e clique no botão criar abaixo</p>
+    <h3 class="nome-estado">{{ nome_estado }}</h3>
+    <p class="texto">Selecione seus candidatos e clique no botão criar abaixo</p>
 
-<form class="form-horizontal" role="form">
-{% for cargo in cargos %}
-    {% include "include/candidato_escolha.html" %}
-{% endfor %}
-</form>
+    <form class="form-horizontal" role="form">
+    {% for cargo in cargos %}
+        {% include "include/candidato_escolha.html" %}
+    {% endfor %}
+    </form>
 
-<div class="row text-center">
-    <a href="{% url 'estados' %}" class="btn btn-warning" role="button">Voltar</a> <a href="" class="btn btn-success link-santinho disabled" role="button">Criar</a> <button class="btn btn-danger limpar">Limpar</button>
-</div>
+    <div class="row text-center">
+        <a href="{% url 'estados' %}" class="btn btn-warning" role="button">Voltar</a> <a href="" class="btn btn-success link-santinho disabled" role="button">Criar</a> <button class="btn btn-danger limpar">Limpar</button>
+    </div>
 {% endblock corpo %}
 
 {% block js_bottom %}
@@ -33,11 +33,11 @@
     var $senador = $("#senador");
     var $deputadoFederal = $("#deputado-federal");
     var $deputadoEstadual = $("#deputado-{% if estado == 'DF' %}distrital{% else %}estadual{% endif %}");
-    $presidente.chosen();
-    $governador.chosen();
-    $senador.chosen();
-    $deputadoFederal.chosen();
-    $deputadoEstadual.chosen();
+    $presidente.select2();
+    $governador.select2();
+    $senador.select2();
+    $deputadoFederal.select2();
+    $deputadoEstadual.select2();
 
     $(".limpar").click(function() {
         presidente = null;
@@ -46,21 +46,11 @@
         deputado_federal = null;
         deputado_estadual = null;
 
-        $presidente.val('');
-        $presidente.trigger('chosen:updated');
-
-        $governador.val('');
-        $governador.trigger('chosen:updated');
-
-        $senador.val('');
-        $senador.trigger('chosen:updated');
-
-        $deputadoFederal.val('');
-        $deputadoFederal.trigger('chosen:updated');
-
-        $deputadoEstadual.val('');
-        $deputadoEstadual.trigger('chosen:updated');
-
+        $presidente.select2('val', '');
+        $governador.select2('val', '');
+        $senador.select2('val', '');
+        $deputadoFederal.select2('val', '');
+        $deputadoEstadual.select2('val', '');
         $linkSantinho.addClass('disabled');
     });
     function atualizaBotao() {
