@@ -77,3 +77,11 @@ body {
     font-family: 'Roboto', verdana, sans-serif;
     font-size: 30px;
 }
+
+.print {
+    display:block;
+}
+
+.no-print {
+    display:none;
+}

@@ -3,6 +3,7 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:500,300' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/santinho.css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/share.bar.min.css" />
+{#    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/print.css" media="print" />#}
 {% endblock css %}
 {% block corpo %}
     <form action="{% url "escolher_candidatos" estado=estado %}" method="post">
