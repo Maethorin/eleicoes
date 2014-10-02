@@ -7,55 +7,12 @@
 }
 
 .pre-gov .candidato {
-    padding: 17px 52px 10px 16px;
-    margin: 0 15px 26px 0;
+    padding: 17px 54px 10px 16px;
+    margin: 0 15px 31px 0;
 }
 
 .pre-gov .foto {
     margin-right: 25px;
-}
-
-.outros .candidato {
-    padding: 15px;
-    margin: 0 10px 10px 0;
-}
-
-.candidato {
-    color: #333;
-    font-family: 'Roboto', verdana, sans-serif;
-    border: solid 1px #D4D6D9;
-    background-color: #F1F1F1;
-    -webkit-box-shadow: 2px 2px 2px 0 rgba(150, 150, 150, 0.75);
-    -moz-box-shadow:    2px 2px 2px 0 rgba(150, 150, 150, 0.75);
-    box-shadow:         2px 2px 2px 0 rgba(150, 150, 150, 0.75);
-}
-
-.candidato .foto, .candidato .dados {
-    float: left;
-}
-
-.pre-gov .nome {
-    margin-top: 11px;
-    line-height: 37px;
-    font-size: 34px;
-}
-
-.pre-gov .segundo-nome {
-    letter-spacing: -0.13em;
-    line-height: 39px;
-}
-
-.outros .nome {
-    margin-top: 10px;
-    line-height: 28px;
-}
-
-.primero-nome, .numero {
-    font-weight: 300;
-}
-
-.numero-partido, .cargo, .partido, .segundo-nome {
-    font-weight: 500;
 }
 
 .pre-gov .cargo {
@@ -75,25 +32,86 @@
     line-height: 19px;
 }
 
-.outros .cargo {
-    font-size: 15px;
+.pre-gov img {
+    height: 221px;
+}
+
+.pre-gov .nome {
+    margin-top: 11px;
+    font-size: 34px;
+}
+
+.pre-gov .primero-nome {
+    letter-spacing: -0.01em;
+    line-height: 36px;
+}
+
+.pre-gov .segundo-nome {
+    letter-spacing: -0.13em;
+    line-height: 39px;
+}
+
+.outros .candidato {
+    padding: 11px 40px 7px 6px;
+    margin: 0 10px 10px 0;
 }
 
 .outros .nome {
-    font-size: 25px;
+    font-size: 21px;
+    margin-top: 10px;
+    line-height: 28px;
+}
+
+
+.outros .primero-nome {
+    letter-spacing: -0.002em;
+    line-height: 29px;
+}
+
+.outros .segundo-nome {
+    letter-spacing: -0.12em;
+    line-height: 21px;
+}
+
+.outros .cargo {
+    font-size: 12px;
+    line-height: 10px;
 }
 
 .outros .numero {
-    font-size: 35px;
-}
-
-.pre-gov img {
-    height: 221px;
+    font-size: 45px;
 }
 
 .outros img {
     height: 145px;
 }
+
+.outros .foto {
+    margin-right: 22px;
+}
+
+.primero-nome, .numero {
+    font-weight: 300;
+}
+
+.numero-partido, .cargo, .partido, .segundo-nome {
+    font-weight: 500;
+}
+
+.candidato {
+    color: #333;
+    font-family: 'Roboto', verdana, sans-serif;
+    border: solid 1px #D4D6D9;
+    background-color: #F1F1F1;
+    -webkit-box-shadow: 2px 2px 2px 0 rgba(150, 150, 150, 0.75);
+    -moz-box-shadow:    2px 2px 2px 0 rgba(150, 150, 150, 0.75);
+    box-shadow:         2px 2px 2px 0 rgba(150, 150, 150, 0.75);
+}
+
+.candidato .foto, .candidato .dados {
+    float: left;
+}
+
 
 .algarismo {
     background-color: #555;

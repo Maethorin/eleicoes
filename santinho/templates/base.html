@@ -1,5 +1,10 @@
-<html>
+<html lang="pt_BR">
     <head>
+        <meta name="keywords" content="eleições,eleicoes 2014,presidente,governador,senador,deputado federal,deputado estadual,deputado distrital,urna,urna eletrônica,santinho,lembrete,macete,lembrar,candidatos,imprimir"/>
+        <meta name="description" content="Monte o santinho dos seus candidatos para as Eleições 2014. Aqui, você escolhe seu estado, presidente, governador, senador, deputado federal, deputado estadual (ou distrital) e exibe o santinho para você lembrar e levar com você até a Urna Eletrônica. Você pode imprimir ou levar no seu celular!"/>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/static/css/bootstrap.min.css">
         <link rel="stylesheet" href="/static/css/chosen.css">
         <link rel="stylesheet" href="/static/css/base.css">
@@ -21,8 +26,22 @@
             </div>
             <div class="col-sm-2"></div>
         </div>
-        <div class="row text-center rodape">
-            RODAPÉ
+        <div class="rodape">
+            <div class="row links">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <a href="{% url 'home' %}">Início</a> | <a href="{% url 'estados' %}">Monte o seu santinho</a>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <h4>Como funciona:</h4>
+                    <p>Monte o santinho dos seus candidatos para as Eleições 2014. Aqui, você escolhe seu estado, presidente, governador, senador, deputado federal, deputado estadual (ou distrital) e exibe o santinho para você lembrar e levar com você até a Urna Eletrônica. Você pode imprimir ou levar no seu celular!</p>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
         </div>
     </div>
         <script type="text/javascript" src="/static/js/jquery.js"></script>
