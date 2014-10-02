@@ -86,7 +86,7 @@ class Candidato(models.Model):
     partido = models.ForeignKey(Partido)
 
     class Meta:
-        ordering = ("numero", )
+        ordering = ("nome", )
         unique_together = (("numero", "estado", "cargo"),)
 
     def __unicode__(self):
