@@ -40,7 +40,6 @@ class Cargo(models.Model):
     codigo = models.IntegerField(unique=True)
     nome = models.CharField(max_length=128)
     ambito = models.CharField(max_length=1, choices=AMBITOS)
-    zeros_nulo = models.CharField(max_length=5, null=True)
 
     class Meta:
         ordering = ("codigo", )
