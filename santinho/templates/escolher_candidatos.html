@@ -54,7 +54,12 @@
         $linkSantinho.addClass('disabled');
     });
     function atualizaBotao() {
-        if (presidente && governador && senador && deputado_federal && deputado_estadual) {
+        console.log(presidente);
+        console.log(governador);
+        console.log(senador);
+        console.log(deputado_federal);
+        console.log(deputado_estadual);
+        if (presidente != null && governador != null && senador != null && deputado_federal != null && deputado_estadual != null) {
             var url = "/santinho/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
             $linkSantinho.attr("href", url);
             $linkSantinho.removeClass('disabled');

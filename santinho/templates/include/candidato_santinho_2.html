@@ -2,7 +2,11 @@
     <input type="hidden" name="candidato_{{ candidato.cargo.codigo }}" value="{{ candidato.numero }}"/>
     <div class="candidato">
         <div class="foto">
+            {% if candidato.nome == "Voto Nulo" or candidato.nome == "Voto em Branco" %}
+            <img src="{{ STATIC_URL }}img/{{ candidato.nome|slugify }}.jpg" alt="{{ candidato.nome }}"/>
+            {% else %}
             <img src="http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{{ candidato.estado }}/foto/{{ candidato.codigo_foto }}.jpg" alt="{{ canditado.nome }}"/>
+            {% endif %}
         </div>
         <div class="dados">
             <div class="cargo">
@@ -12,7 +16,7 @@
                 <div class="primero-nome">
                     {{ candidato.primeiro_nome }}
                 </div>
-                <div class="segundo-nome">
+                <div class="segundo-nome{% if candidato.segundo_nome == "Nulo" or candidato.nome == "Voto em Branco"  %} nulo{% endif %}">
                     {{ candidato.segundo_nome }}
                 </div>
             </div>

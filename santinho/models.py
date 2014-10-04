@@ -40,6 +40,7 @@ class Cargo(models.Model):
     codigo = models.IntegerField(unique=True)
     nome = models.CharField(max_length=128)
     ambito = models.CharField(max_length=1, choices=AMBITOS)
+    zeros_nulo = models.CharField(max_length=5, null=True)
 
     class Meta:
         ordering = ("codigo", )
@@ -111,7 +112,13 @@ class Candidato(models.Model):
         partido_sigla = campos[4]
         partido = Partido.obter_por_sigla(partido_sigla)
         cargo = Cargo.objects.get(id=cargo)
-        candidato, criado = cls.objects.get_or_create(nome=nome, numero=numero, estado=estado, cargo=cargo, partido=partido)
+        candidato, criado = cls.objects.get_or_create(numero=numero, estado=estado, cargo=cargo, partido=partido)
+        atualizado = False
+        if candidato.nome != nome:
+            atualizado = True
+            candidato.nome = nome
+        print u"{} - {} - {} - {} - {} - {}".format(criado, atualizado, estado, cargo.id, numero, nome)
+        candidato.save()
         return candidato
 
     @property

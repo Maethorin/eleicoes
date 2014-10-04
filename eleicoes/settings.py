@@ -79,7 +79,7 @@ level = 'DEBUG'
 if DEBUG is True:
     LOGGING = {
         'version': 1,
-        'disable_existing_loggers': False,
+        'disable_existing_loggers': True,
         'formatters': {
             'standard': {
                 'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
@@ -104,10 +104,10 @@ if DEBUG is True:
                 'level': level,
                 'propagate': False
             },
-            'django.db.backends': {
-                'level': level,
-                'handers': ['default'],
-            },
+            # 'django.db.backends': {
+            #     'level': level,
+            #     'handers': ['default'],
+            # },
         }
     }
 
