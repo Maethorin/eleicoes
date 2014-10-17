@@ -78,12 +78,15 @@ class Coligacao(models.Model):
 
 
 class Candidato(models.Model):
+    SITUACOES = (("D", "Deferido"), ("E", "Eleito"), ("S", "Segundo Turno"), ("N", u"Não Eleito"))
+
     nome = models.CharField(max_length=255)
     numero = models.IntegerField()
     codigo_foto = models.CharField(max_length=15, null=True)
     estado = models.CharField(max_length=2, choices=ESTADOS)
     cargo = models.ForeignKey(Cargo)
     partido = models.ForeignKey(Partido)
+    situacao = models.CharField(max_length=1, choices=SITUACOES, default="D")
 
     class Meta:
         ordering = ("nome", )
