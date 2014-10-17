@@ -16,30 +16,6 @@ def nome_do_estado(sigla):
     return ''
 
 
-def codigos_fotos(request):
-    for estado in ESTADOS:
-        for cargo in range(1, 9):
-            if estado[0] == 'BR' and cargo > 2:
-                continue
-            if estado[0] != 'BR' and cargo <= 2:
-                continue
-            if estado[0] == "DF" and cargo == 7:
-                continue
-            if estado[0] != "DF" and cargo == 8:
-                continue
-            url_imagem = "http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{}/candidatos/cargo/{}".format(estado[0], cargo)
-            conteudo_imagem = requests.get(url_imagem).content.decode('ISO-8859-1')
-            pagina = lhtml.fromstring(conteudo_imagem)
-            lista_candidatos = pagina.cssselect('.row-link-cand')
-            for linha in lista_candidatos:
-                numero_canditado = int(linha.cssselect('td')[2].text)
-                candidato = Candidato.obtem_do_numero(numero_canditado, estado[0], cargo)
-                if candidato and not candidato.codigo_foto:
-                    candidato.codigo_foto = linha.attrib['id']
-                    candidato.save()
-    return render(request, "importar.html", locals())
-
-
 def adiciona_fotos(request):
     candidatos_sem_foto = Candidato.objects.filter(codigo_foto=None).order_by("estado")
     estado = ""
@@ -60,32 +36,6 @@ def adiciona_fotos(request):
                 candidato.save()
                 break
         print u"{} - {} - {} - {} - {}".format(atualizado, estado, candidato.cargo_id, candidato.numero, candidato.nome)
-    return render(request, "importar.html", locals())
-
-
-def importar_de_csv(request):
-    urls = []
-    for estado in ESTADOS:
-        for cargo in range(1, 9):
-            if estado[0] == 'BR' and cargo > 2:
-                continue
-            if estado[0] != 'BR' and cargo <= 2:
-                continue
-            if estado[0] == "DF" and cargo == 7:
-                continue
-            if estado[0] != "DF" and cargo == 8:
-                continue
-            url = "http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{}/candidatos/cargo/{}/downloadCSV".format(estado[0], cargo)
-            csv = requests.get(url).content.decode('ISO-8859-1')
-            linhas = csv.split("\n")[1:]
-            candidatos = 0
-            for linha in linhas:
-                if not linha:
-                    continue
-                if "Deferido" in linha.split(";")[5]:
-                    Candidato.obtem_a_partir_de_linha_do_csv(linha, cargo, estado[0])
-                    candidatos += 1
-            urls.append(u"{} em {}: {} candidatos processados".format(Cargo.objects.get(id=cargo).nome, estado[0], candidatos))
     return render(request, "importar.html", locals())
 
 
@@ -167,3 +117,22 @@ def estados(request):
 
 def home(request):
     return render_to_response('home.html', context_instance=RequestContext(request))
+
+
+def resultado(request, estado, presidente, governador, senador, deputado_federal, deputado_estadual):
+    candidatos = [
+        obter_candidato(presidente, 'BR', 1, "Presidente"),
+        obter_candidato(governador, estado, 3, "Governador"),
+        obter_candidato(senador, estado, 5, "Senador"),
+        obter_candidato(deputado_federal, estado, 6, "Deputado Federal")
+    ]
+    cargo = 7
+    cargo_nome = "Deputado Estadual"
+    if estado == "DF":
+        cargo = 8
+        cargo_nome = "Deputado Distrital"
+    candidatos.append(obter_candidato(deputado_estadual, estado, cargo, cargo_nome))
+    pre_gov = candidatos[:2]
+    outros = candidatos[2:]
+    eh_resultado = True
+    return render_to_response('resultado.html', locals(), context_instance=RequestContext(request))

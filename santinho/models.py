@@ -77,8 +77,33 @@ class Coligacao(models.Model):
         return self.nome
 
 
+class SituacaoDeCandidato(object):
+    deferido = "D"
+    eleito = "E"
+    suplente = "S"
+    segundo_turno = "T"
+    nao_eleito = "N"
+
+    @classmethod
+    def obter_situacao(cls, situacao):
+        if situacao.lower() == u"suplente":
+            return cls.suplente
+        if situacao.lower() == u"não eleito":
+            return cls.nao_eleito
+        if situacao.lower() == u"2º turno":
+            return cls.segundo_turno
+        if situacao.lower() in [u"eleito por qp", u"eleito por média", u"eleito"]:
+            return cls.eleito
+        return cls.deferido
+
+
 class Candidato(models.Model):
-    SITUACOES = (("D", "Deferido"), ("E", "Eleito"), ("S", "Segundo Turno"), ("N", u"Não Eleito"))
+    SITUACOES = (
+        (SituacaoDeCandidato.deferido, "Deferido"),
+        (SituacaoDeCandidato.eleito, "Eleito"),
+        (SituacaoDeCandidato.suplente, "Suplente"),
+        (SituacaoDeCandidato.segundo_turno, "Segundo Turno"),
+        (SituacaoDeCandidato.nao_eleito, u"Não Eleito"))
 
     nome = models.CharField(max_length=255)
     numero = models.IntegerField()
@@ -93,7 +118,7 @@ class Candidato(models.Model):
         unique_together = (("numero", "estado", "cargo"),)
 
     def __unicode__(self):
-        return u"{} - {} - {}".format(self.numero, self.partido.sigla, self.nome)
+        return u"{} - {} - {} - {}".format(self.estado, self.numero, self.partido.sigla, self.nome)
 
     @classmethod
     def obter_lista_por_cargo(cls, cargo, estado):
@@ -107,11 +132,12 @@ class Candidato(models.Model):
             return None
 
     @classmethod
-    def obtem_a_partir_de_linha_do_csv(cls, linha, cargo, estado):
+    def obtem_a_partir_de_linha_do_csv(cls, linha, cargo, estado, printer=None, resultado=False):
         campos = linha.split(";")
-        nome = campos[1]
-        numero = campos[3]
-        partido_sigla = campos[4]
+        soma = (1 if resultado else 0)
+        nome = campos[1 + soma]
+        numero = campos[3 + soma]
+        partido_sigla = campos[4 + soma]
         partido = Partido.obter_por_sigla(partido_sigla)
         cargo = Cargo.objects.get(id=cargo)
         candidato, criado = cls.objects.get_or_create(numero=numero, estado=estado, cargo=cargo, partido=partido)
@@ -119,9 +145,15 @@ class Candidato(models.Model):
         if candidato.nome != nome:
             atualizado = True
             candidato.nome = nome
-        print u"{} - {} - {} - {} - {} - {}".format(criado, atualizado, estado, cargo.id, numero, nome)
-        candidato.save()
-        return candidato
+        if resultado:
+            situacao = SituacaoDeCandidato.obter_situacao(campos[0])
+            if candidato.situacao != situacao:
+                atualizado = True
+                candidato.situacao = situacao
+        if printer:
+            printer(u"{} - {} - {} - {} - {}".format(("CRIADO" if criado else ("ATUALIZADO" if atualizado else u"SEM ALTERAÇÃO")), estado, cargo.id, numero, nome))
+        if atualizado:
+            candidato.save()
 
     @property
     def primeiro_nome(self):

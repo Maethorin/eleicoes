@@ -12,6 +12,11 @@
             <div class="cargo">
                 {{ candidato.cargo.nome|upper }}
             </div>
+            {% if eh_resultado %}
+            <div class="resultado">
+                {{ candidato.get_situacao_display }}
+            </div>
+            {% endif %}
             <div class="nome">
                 <div class="primero-nome">
                     {{ candidato.primeiro_nome }}

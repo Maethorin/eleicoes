@@ -3,6 +3,7 @@
 {% block corpo %}
     <h3 class="nome-estado">{{ nome_estado }}</h3>
     <p class="texto">Selecione seus candidatos e clique no botão criar abaixo</p>
+    <p class="texto">Agora, você também pode conferir o resultado das eleições para os seus candidatos. Selecione os candidatos e clique no botão Resultado</p>
 
     <form class="form-horizontal" role="form">
     {% for cargo in cargos %}
@@ -11,7 +12,10 @@
     </form>
 
     <div class="row text-center">
-        <a href="{% url 'estados' %}" class="btn btn-warning" role="button">Voltar</a> <a href="" class="btn btn-success link-santinho disabled" role="button">Criar</a> <button class="btn btn-danger limpar">Limpar</button>
+        <a href="{% url 'estados' %}" class="btn btn-warning" role="button">Voltar</a>
+        <a href="" class="btn btn-success link-santinho disabled" role="button">Criar</a>
+        <a href="" class="btn btn-default link-resultado disabled" role="button">Resultado</a>
+        <button class="btn btn-danger limpar">Limpar</button>
     </div>
 {% endblock corpo %}
 
@@ -28,6 +32,7 @@
     {% endif %}
 
     var $linkSantinho = $(".link-santinho");
+    var $linkResultado = $(".link-resultado");
     var $presidente = $("#presidente");
     var $governador = $("#governador");
     var $senador = $("#senador");
@@ -52,6 +57,7 @@
         $deputadoFederal.select2('val', '');
         $deputadoEstadual.select2('val', '');
         $linkSantinho.addClass('disabled');
+        $linkResultado.addClass('disabled');
     });
     function atualizaBotao() {
         console.log(presidente);
@@ -63,6 +69,9 @@
             var url = "/santinho/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
             $linkSantinho.attr("href", url);
             $linkSantinho.removeClass('disabled');
+            var url = "/resultado/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
+            $linkResultado.attr("href", url);
+            $linkResultado.removeClass('disabled');
         }
     }
     $("select").change(function() {
