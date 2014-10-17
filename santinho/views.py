@@ -16,29 +16,6 @@ def nome_do_estado(sigla):
     return ''
 
 
-def adiciona_fotos(request):
-    candidatos_sem_foto = Candidato.objects.filter(codigo_foto=None).order_by("estado")
-    estado = ""
-    lista_candidatos = []
-    for candidato in candidatos_sem_foto:
-        if estado != candidato.estado:
-            estado = candidato.estado
-            url_imagem = "http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{}/candidatos/cargo/{}".format(candidato.estado, candidato.cargo_id)
-            conteudo_imagem = requests.get(url_imagem).content.decode('ISO-8859-1')
-            pagina = lhtml.fromstring(conteudo_imagem)
-            lista_candidatos = pagina.cssselect('.row-link-cand')
-        atualizado = False
-        for linha in lista_candidatos:
-            numero_canditado = int(linha.cssselect('td')[2].text)
-            if candidato.numero == numero_canditado:
-                atualizado = True
-                candidato.codigo_foto = linha.attrib['id']
-                candidato.save()
-                break
-        print u"{} - {} - {} - {} - {}".format(atualizado, estado, candidato.cargo_id, candidato.numero, candidato.nome)
-    return render(request, "importar.html", locals())
-
-
 def obter_candidato(numero, estado, cargo, cargo_nome):
     if not "X" in numero and int(numero) > 0:
         return Candidato.obtem_do_numero(numero, estado, cargo)

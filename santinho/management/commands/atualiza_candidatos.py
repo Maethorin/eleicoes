@@ -10,10 +10,44 @@ from santinho.models import ESTADOS, Candidato, Cargo
 class Command(BaseCommand):
     def handle(self, *args, **options):
         if args[0] == "fotos":
-            self.grava_fotos_todos()
+            if "adiciona" in args:
+                self.adiciona_fotos()
+            else:
+                self.grava_fotos_todos()
         if args[0] == "candidatos":
             resultado = "resultado" in args
             self.importar_candidatos(resultado)
+
+    def adiciona_fotos(self):
+        self.stdout.write(u"INICIANDO")
+        candidatos_sem_foto = Candidato.objects.filter(codigo_foto=None).order_by("estado")
+        estado = ""
+        lista_candidatos = []
+        todos_atualizados = True
+        for candidato in candidatos_sem_foto:
+            if estado != candidato.estado:
+                estado = candidato.estado
+                url_imagem = "http://divulgacand2014.tse.jus.br/divulga-cand-2014/eleicao/2014/UF/{}/candidatos/cargo/{}".format(candidato.estado, candidato.cargo_id)
+                self.stdout.write(u"OBTENDO PÁGINA: {}".format(url_imagem))
+                conteudo_imagem = requests.get(url_imagem).content.decode('ISO-8859-1')
+                pagina = lhtml.fromstring(conteudo_imagem)
+                lista_candidatos = pagina.cssselect('.row-link-cand')
+            atualizado = False
+            self.stdout.write(u"VERFICANDO {}".format(candidato))
+            for linha in lista_candidatos:
+                numero_canditado = int(linha.cssselect('td')[2].text)
+                if candidato.numero == numero_canditado:
+                    atualizado = True
+                    candidato.codigo_foto = linha.attrib['id']
+                    candidato.save()
+                    self.stdout.write(u"ATUALIZADO {}".format(candidato))
+                    break
+            if not atualizado and todos_atualizados:
+                todos_atualizados = False
+            self.stdout.write(u"{} - {} - {} - {} - {}".format(atualizado, estado, candidato.cargo_id, candidato.numero, candidato.nome))
+        if not todos_atualizados:
+            self.stdout.write(u"RODE NOVAMENTE, POIS NEM TODOS FORAM ATUALIZADOS")
+        self.stdout.write(u"FINALIZADO")
 
     def importar_candidatos(self, resultado):
         self.stdout.write(u"INICIANDO")
