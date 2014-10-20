@@ -27,7 +27,11 @@
         </div>
     </form>
     {% if eh_segundo_turno %}
+    {% if governador %}
     <div class="share-bar no-print" data-title="Santinho Eleições 2014" data-url="{% url 'santinho_criar_2_turno' estado presidente governador %}" data-image-url="http://www.tre-mg.jus.br/imagens/imagens/marca-das-eleicoes-2014/@@images/be49cc7e-06ca-465c-83b9-f480ee664bf3.jpeg" data-hashtags="#eleições #candidatos #santinho"></div>
+    {% else %}
+    <div class="share-bar no-print" data-title="Santinho Eleições 2014" data-url="{% url 'santinho_criar_2_turno' estado presidente %}" data-image-url="http://www.tre-mg.jus.br/imagens/imagens/marca-das-eleicoes-2014/@@images/be49cc7e-06ca-465c-83b9-f480ee664bf3.jpeg" data-hashtags="#eleições #candidatos #santinho"></div>
+    {% endif %}
     {% else %}
     <div class="share-bar no-print" data-title="Santinho Eleições 2014" data-url="{% url 'santinho_criar' estado presidente governador senador deputado_federal deputado_estadual %}" data-image-url="http://www.tre-mg.jus.br/imagens/imagens/marca-das-eleicoes-2014/@@images/be49cc7e-06ca-465c-83b9-f480ee664bf3.jpeg" data-hashtags="#eleições #candidatos #santinho"></div>
     {% endif %}

@@ -21,9 +21,11 @@
 {% block js_bottom %}
 <script type="application/javascript">
     var presidente = {% define_valor_js 'presidente' %};
+    {% if estado_tem_segundo_turno %}
     var governador = {% define_valor_js 'governador' %};
-    var senador = {% define_valor_js 'senador' %};
+    {% endif %}
     {% if not eh_segundo_turno %}
+    var senador = {% define_valor_js 'senador' %};
     var deputado_federal = {% define_valor_js 'deputado-federal' %};
     {% if estado == 'DF' %}
     var deputado_estadual = {% define_valor_js 'deputado-distrital' %};
@@ -33,16 +35,19 @@
     {% endif %}
 
     var $linkSantinho = $(".link-santinho");
-    var $linkResultado = $(".link-resultado");
     var $presidente = $("#presidente");
+    {% if estado_tem_segundo_turno %}
     var $governador = $("#governador");
+    {% endif %}
     {% if not eh_segundo_turno %}
     var $senador = $("#senador");
     var $deputadoFederal = $("#deputado-federal");
     var $deputadoEstadual = $("#deputado-{% if estado == 'DF' %}distrital{% else %}estadual{% endif %}");
     {% endif %}
     $presidente.select2();
+    {% if estado_tem_segundo_turno %}
     $governador.select2();
+    {% endif %}
     {% if not eh_segundo_turno %}
     $senador.select2();
     $deputadoFederal.select2();
@@ -51,7 +56,9 @@
 
     $(".limpar").click(function() {
         presidente = null;
+    {% if estado_tem_segundo_turno %}
         governador = null;
+    {% endif %}
     {% if not eh_segundo_turno %}
         senador = null;
         deputado_federal = null;
@@ -59,7 +66,9 @@
     {% endif %}
 
         $presidente.select2('val', '');
+    {% if estado_tem_segundo_turno %}
         $governador.select2('val', '');
+    {% endif %}
 
     {% if not eh_segundo_turno %}
         $senador.select2('val', '');
@@ -68,22 +77,22 @@
     {% endif %}
 
         $linkSantinho.addClass('disabled');
-        $linkResultado.addClass('disabled');
     });
     function atualizaBotao() {
         {% if eh_segundo_turno %}
-            if (presidente != null && governador != null) {
-            var url = "/santinho/2-turno/{{ estado }}/" + presidente + "/" + governador;
+        {% if not estado_tem_segundo_turno %}
+        if (presidente != null) {
+            var url = "/santinho/2-turno/{{ estado }}/" + presidente;
         {% else %}
-            if (presidente != null && governador != null && senador != null && deputado_federal != null && deputado_estadual != null) {
+        if (presidente != null && governador != null) {
+            var url = "/santinho/2-turno/{{ estado }}/" + presidente + "/" + governador;
+        {% endif %}
+        {% else %}
+        if (presidente != null && governador != null && senador != null && deputado_federal != null && deputado_estadual != null) {
             var url = "/santinho/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
         {% endif %}
             $linkSantinho.attr("href", url);
             $linkSantinho.removeClass('disabled');
-
-            var url = "/resultado/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
-            $linkResultado.attr("href", url);
-            $linkResultado.removeClass('disabled');
         }
     }
     $("select").change(function() {

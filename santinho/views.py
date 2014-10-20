@@ -44,12 +44,13 @@ def obter_candidato(numero, estado, cargo, cargo_nome):
     }
 
 
-def criar(request, estado, presidente, governador, senador=None, deputado_federal=None, deputado_estadual=None):
+def criar(request, estado, presidente, governador=None, senador=None, deputado_federal=None, deputado_estadual=None):
     eh_segundo_turno = settings.EH_SEGUNDO_TURNO
     candidatos = [
         obter_candidato(presidente, 'BR', 1, "Presidente"),
-        obter_candidato(governador, estado, 3, "Governador"),
     ]
+    if governador:
+        candidatos.append(obter_candidato(governador, estado, 3, "Governador"))
     pre_gov = candidatos[:2]
     outros = []
     if senador:
@@ -70,8 +71,10 @@ def santinho_escolher_candidatos(request, estado):
     eh_segundo_turno = settings.EH_SEGUNDO_TURNO
     cargos = [
         {"nome": "Presidente", "candidatos": Candidato.obter_lista_por_cargo(1, 'BR', eh_segundo_turno), "nulo": "XX", "branco": "00"},
-        {"nome": "Governador", "candidatos": Candidato.obter_lista_por_cargo(3, estado, eh_segundo_turno), "nulo": "XX", "branco": "00"},
     ]
+    governadores = {"nome": "Governador", "candidatos": Candidato.obter_lista_por_cargo(3, estado, eh_segundo_turno), "nulo": "XX", "branco": "00"}
+    cargos.append(governadores)
+    estado_tem_segundo_turno = len(governadores["candidatos"]) > 0
     deputado_nome = "Deputado Estadual"
     deputado_slug = "deputado-estadual"
     deputado_cargo = 7
