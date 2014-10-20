@@ -52,9 +52,11 @@ def criar(request, estado, presidente, governador, senador=None, deputado_federa
     ]
     pre_gov = candidatos[:2]
     outros = []
-    if not eh_segundo_turno:
+    if senador:
         outros.append(obter_candidato(senador, estado, 5, "Senador"))
+    if deputado_federal:
         outros.append(obter_candidato(deputado_federal, estado, 6, "Deputado Federal"))
+    if deputado_estadual:
         cargo = 7
         cargo_nome = "Deputado Estadual"
         if estado == "DF":

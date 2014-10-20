@@ -9,12 +9,12 @@
     <form action="{% url "santinho_escolher_candidatos" estado=estado %}" method="post">
         {% csrf_token %}
         <div class="row candidatos">
-            <div class="pre-gov col-sm-8">
+            <div class="pre-gov col-sm-7">
                 {% for candidato in pre_gov %}
                     {% include "include/candidato_santinho_2.html" %}
                 {% endfor %}
             </div>
-            <div class="outros col-sm-4">
+            <div class="outros col-sm-5">
                 {% for candidato in outros %}
                     {% include "include/candidato_santinho_2.html" %}
                 {% endfor %}
