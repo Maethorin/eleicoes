@@ -17,3 +17,13 @@ def define_valor_js(context, cargo):
     if "selecionados" in context:
         return context["selecionados"].get(cargo, 'null')
     return 'null'
+
+@register.simple_tag
+def css_situacao(situacao):
+    if situacao == "E":
+        return "success"
+    if situacao == "N":
+        return "danger"
+    if situacao == "T":
+        return "warning"
+    return "default"

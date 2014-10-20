@@ -3,7 +3,7 @@
 {% block corpo %}
     <h3 class="nome-estado">Segundo Passo</h3>
     <h2>Seu estado: {{ nome_estado }}</h2>
-    <p class="texto">Selecione seus candidatos e clique no botão Criar.</p>
+    <p class="texto">Selecione os candidatos e clique no botão Resultado.</p>
 
     <form class="form-horizontal" role="form">
     {% for cargo in cargos %}
@@ -13,7 +13,7 @@
 
     <div class="row text-center">
         <a href="{% url 'estados' %}" class="btn btn-warning" role="button">Voltar</a>
-        <a href="" class="btn btn-success link-santinho disabled" role="button">Criar</a>
+        <a href="" class="btn btn-success link-resultado disabled" role="button">Resultado</a>
         <button class="btn btn-danger limpar">Limpar</button>
     </div>
 {% endblock corpo %}
@@ -23,64 +23,40 @@
     var presidente = {% define_valor_js 'presidente' %};
     var governador = {% define_valor_js 'governador' %};
     var senador = {% define_valor_js 'senador' %};
-    {% if not eh_segundo_turno %}
     var deputado_federal = {% define_valor_js 'deputado-federal' %};
     {% if estado == 'DF' %}
     var deputado_estadual = {% define_valor_js 'deputado-distrital' %};
     {% else %}
     var deputado_estadual = {% define_valor_js 'deputado-estadual' %};
     {% endif %}
-    {% endif %}
 
-    var $linkSantinho = $(".link-santinho");
     var $linkResultado = $(".link-resultado");
     var $presidente = $("#presidente");
     var $governador = $("#governador");
-    {% if not eh_segundo_turno %}
     var $senador = $("#senador");
     var $deputadoFederal = $("#deputado-federal");
     var $deputadoEstadual = $("#deputado-{% if estado == 'DF' %}distrital{% else %}estadual{% endif %}");
-    {% endif %}
     $presidente.select2();
     $governador.select2();
-    {% if not eh_segundo_turno %}
     $senador.select2();
     $deputadoFederal.select2();
     $deputadoEstadual.select2();
-    {% endif %}
 
     $(".limpar").click(function() {
         presidente = null;
         governador = null;
-    {% if not eh_segundo_turno %}
         senador = null;
         deputado_federal = null;
         deputado_estadual = null;
-    {% endif %}
-
         $presidente.select2('val', '');
         $governador.select2('val', '');
-
-    {% if not eh_segundo_turno %}
         $senador.select2('val', '');
         $deputadoFederal.select2('val', '');
         $deputadoEstadual.select2('val', '');
-    {% endif %}
-
-        $linkSantinho.addClass('disabled');
         $linkResultado.addClass('disabled');
     });
     function atualizaBotao() {
-        {% if eh_segundo_turno %}
-            if (presidente != null && governador != null) {
-            var url = "/santinho/2-turno/{{ estado }}/" + presidente + "/" + governador;
-        {% else %}
-            if (presidente != null && governador != null && senador != null && deputado_federal != null && deputado_estadual != null) {
-            var url = "/santinho/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
-        {% endif %}
-            $linkSantinho.attr("href", url);
-            $linkSantinho.removeClass('disabled');
-
+        if (presidente != null && governador != null && senador != null && deputado_federal != null && deputado_estadual != null) {
             var url = "/resultado/{{ estado }}/" + presidente + "/" + governador + "/" + senador + "/" + deputado_federal + "/" + deputado_estadual;
             $linkResultado.attr("href", url);
             $linkResultado.removeClass('disabled');
@@ -94,7 +70,6 @@
         if ($this.attr("id") == "governador") {
             governador = $this.val()
         }
-    {% if not eh_segundo_turno %}
         if ($this.attr("id") == "senador") {
             senador = $this.val()
         }
@@ -104,7 +79,6 @@
         if ($this.attr("id") == "deputado-{% if estado == 'DF' %}distrital{% else %}estadual{% endif %}") {
             deputado_estadual = $this.val()
         }
-    {% endif %}
         atualizaBotao();
     });
     atualizaBotao();

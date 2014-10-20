@@ -16,7 +16,7 @@ import dj_database_url
 
 SECRET_KEY = '_whb&g-765uf8jrm(q+%+f2wt%q84s#za!$#-%_kco-o0tputw'
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -120,3 +120,5 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+EH_SEGUNDO_TURNO = True

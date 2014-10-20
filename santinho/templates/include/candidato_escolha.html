@@ -1,11 +1,15 @@
 {% load filtros %}
+{% if cargo.candidatos %}
 <div class="form-group">
     <select id="{{ cargo.nome|slugify }}" name="{{ cargo.nome|slugify }}" data-placeholder="Para {{ cargo.nome }}..." class="form-control select-candidato">
         <option value=""></option>
+        {% if not eh_resultado %}
         <option value="{{ cargo.nulo }}">Voto Nulo</option>
         <option value="{{ cargo.branco }}">Voto em Branco</option>
+        {% endif %}
         {% for candidato in cargo.candidatos %}
             <option value="{{ candidato.numero }}" {% selecionando cargo.nome|slugify candidato.numero %}>{{ candidato }}</option>
         {% endfor %}
     </select>
 </div>
+{% endif %}

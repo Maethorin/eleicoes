@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block corpo %}
+    <h3 class="nome-estado">Primeiro Passo</h3>
+    <p class="texto">Escolha seu estado e clique em Santinho ou em Resultado para o próximo passo</p>
     <div class="row estado">
         <select id="estado" name="estado" data-placeholder="Escolha seu Estado">
             <option value=""></option>
@@ -9,7 +11,8 @@
         </select>
     </div>
     <div class="row text-center">
-        <a href="" class="btn btn-success avancar disabled" role="button">Avançar</a>
+        <a href="" class="btn btn-success santinho disabled" role="button">Santinho</a>
+        <a href="" class="btn btn-success resultado disabled" role="button">Resultado</a>
     </div>
 {% endblock corpo %}
 
@@ -22,9 +25,13 @@
         var $this = $(this);
         estado = $this.val();
         if (estado) {
-            var url = "/escolher/" + estado;
-            $(".avancar").attr("href", url);
-            $(".avancar").removeClass('disabled');
+            var url_santinho = "{% url 'santinho_escolher_candidatos' 'BR' %}".replace("BR", estado);
+            $(".santinho").attr("href", url_santinho);
+            $(".santinho").removeClass('disabled');
+
+            var url_resultado = "{% url 'resultado_escolher_candidatos' 'BR' %}".replace("BR", estado);
+            $(".resultado").attr("href", url_resultado);
+            $(".resultado").removeClass('disabled');
         }
     });
 </script>

@@ -1,3 +1,5 @@
+{% load filtros %}
+
 <div class="santinho {{ candidato.cargo.nome|slugify }}">
     <input type="hidden" name="candidato_{{ candidato.cargo.codigo }}" value="{{ candidato.numero }}"/>
     <div class="candidato">
@@ -14,7 +16,7 @@
             </div>
             {% if eh_resultado %}
             <div class="resultado">
-                {{ candidato.get_situacao_display }}
+                <span class="label label-{% css_situacao candidato.situacao %}">{{ candidato.get_situacao_display|upper }}</span>
             </div>
             {% endif %}
             <div class="nome">

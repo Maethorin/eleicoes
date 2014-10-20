@@ -6,13 +6,10 @@
     margin-bottom: 5px;
 }
 
-/*.pre-gov, .outros {*/
-    /*float: left;*/
-/*}*/
 
 .pre-gov .candidato {
     padding: 17px 54px 10px 16px;
-    margin: 0 15px 31px 0;
+    margin: 0 15px 37px 0;
 }
 
 .pre-gov .foto {
@@ -37,7 +34,7 @@
 }
 
 .pre-gov img {
-    height: 221px;
+    height: 270px;
 }
 
 .pre-gov .nome {
@@ -91,7 +88,7 @@
 }
 
 .outros img {
-    height: 145px;
+    height: 185px;
 }
 
 .outros .foto {
@@ -139,4 +136,10 @@
 
 .nulo {
     letter-spacing: 0!important;
+}
+
+.resultado {
+    font-size: 18px;
+    margin-top: 5px;
+    letter-spacing: 1px;
 }

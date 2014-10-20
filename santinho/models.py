@@ -121,7 +121,9 @@ class Candidato(models.Model):
         return u"{} - {} - {} - {}".format(self.estado, self.numero, self.partido.sigla, self.nome)
 
     @classmethod
-    def obter_lista_por_cargo(cls, cargo, estado):
+    def obter_lista_por_cargo(cls, cargo, estado, eh_segundo_turno=False):
+        if eh_segundo_turno:
+            return cls.objects.prefetch_related('partido').filter(cargo=cargo, estado=estado, situacao=SituacaoDeCandidato.segundo_turno)
         return cls.objects.prefetch_related('partido').filter(cargo=cargo, estado=estado)
 
     @classmethod
