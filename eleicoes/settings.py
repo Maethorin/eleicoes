@@ -66,7 +66,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = '../staticfiles/eleicoes/'
 STATIC_URL = '/static/'
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
