@@ -1,0 +1,10 @@
+echo "Lendo configurações"
+
+ROOTDIR="/home/ubuntu/eleicoes/"
+
+# Daemon configuration
+DAEMON_PATH="/home/ubuntu/.virtualenvs/eleicoes/bin/gunicorn"
+DAEMON_ARGS="eleicoes.wsgi:application --workers 4 --bind 127.0.0.1:8082 --pid /tmp/gunicorn-eleicoes.pid --daemon"
+RUN_AS="ubuntu"
+
+echo "Pronto!"
